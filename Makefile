@@ -1,7 +1,7 @@
 PKG := github.com/blob42/gosuki
 CGO_ENABLED=1
 CGO_CFLAGS="-g -Wno-return-local-addr"
-SRC := **/*.go
+SRC := $(shell git ls-files | grep '.*\.go$$' | grep -v 'log\.go')
 GOBUILD := go build -v
 GOINSTALL := go install -v
 GOTEST := go test
@@ -61,7 +61,7 @@ release_logging = $(SED_IN_PLACE) 's/LoggingMode = .*/LoggingMode = Release/' pk
 
 
 .PHONY: build
-build: sanitize $(foreach target,$(TARGETS),build/$(target)) 
+build: sanitize $(foreach target,$(TARGETS),build/$(target))
 
 
 .PHONY: sanitize
