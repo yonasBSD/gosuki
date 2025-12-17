@@ -11,8 +11,9 @@
  <div id="search">
     <script>
     (() => {
+        const SearchParams = new URLSearchParams(window.location.search);
+
         function hasFuzzyParam() {
-            const SearchParams = new URLSearchParams(window.location.search);
             return SearchParams.has('fuzzy') && SearchParams.get('fuzzy').trim().toLowerCase() === 'on';
         }
         window.updateFuzzy = function(searchInput) {
@@ -22,13 +23,25 @@
                 if (!searchCheck.checked) searchCheck.checked = true;
             }
         };
+
+        window.clearQueryTag = () => {
+            const searchForm = document.querySelector('#search-form')
+            if (searchForm.elements.tag !== undefined) {
+                searchForm.elements.tag.value = null
+            }
+            // Remove tag parameter from URL and reload
+            const url = new URL(window.location);
+            url.searchParams.delete('tag');
+            window.location.href = url.toString();
+        }
+
     })(window);
 
     </script>
     <form id="search-form"
         hx-target="#bookmarks"
         hx-get="/bookmarks"
-        hx-trigger="keyup changed delay:800ms from:input,change from:(#search-form input) delay:500ms" 
+        hx-trigger="keyup changed delay:800ms from:input, change from:(#search-form input) delay:500ms" 
         action="/"
         method="get"
         hx-params="not page">
@@ -45,7 +58,19 @@
                 placeholder=""
             >
             <div id="search-opts"> 
-                    <div id="stats">results: {{ len .Bookmarks }}/{{ $total }}</div>
+                <div id="stats">results: {{ len .Bookmarks }}/{{ $total }}</div>
+                {{ if $tagQuery }}
+                <noscript>
+                <style>
+                    .js.tag[role=button] {
+                        display: none;
+                    }
+                </style>
+                <a role="button" class="secondary tag" href="/">{{$tagQuery}}<span class="close-icon">×</span></a>
+                </noscript>
+                <div hx-on:click="clearQueryTag()" role="button" class="secondary tag js">{{$tagQuery}}<span class="close-icon">×</span></div>
+                {{end}}
+                <div class="space"></div>
                 <input type="hidden" name="page" value="{{ .QueryParams.PaginationParams.Page }}" />
                 <input id="fuzzy" type="checkbox" name="fuzzy" {{if .QueryParams.Fuzzy}}checked{{end}} />
                 <label for="fuzzy">fuzzy (~query)</label>
