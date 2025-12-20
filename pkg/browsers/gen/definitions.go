@@ -141,7 +141,7 @@ func generateBrowserDefs(confs browserConfigs, relPath string) error {
 	var err error
 	// pretty.Println(confs)
 
-	tmpl := template.Must(template.New("linux_defs").Parse(base_tpl))
+	tmpl := template.Must(template.New("browser_defs").Parse(base_tpl))
 
 	for platform, pConfs := range confs {
 		var buf bytes.Buffer

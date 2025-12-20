@@ -53,6 +53,13 @@ mozilla:
       base_dir: ~/.waterfox
       flat: ~/.var/app/net.waterfox.waterfox/.waterfox
 
+  zen:
+    linux:
+      base_dir: ~/.zen
+      flat: ~/.var/app/app.zen_browser.zen/.zen
+    darwin:
+      base_dir: ~/Library/Application Support/zen
+
 
 
 # other browsers with full BrowserDef definition
