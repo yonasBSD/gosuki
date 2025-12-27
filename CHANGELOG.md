@@ -7,12 +7,13 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [unreleased]
 
-
 ### Added
 
 - Custom daemon listening address with `--listen` flag or `webui` config section
 - Distribution packages builds for Arch Linux and Debian
 - [webui]: search bar now allows toggling currently select tag filter
+- BSD platforms support: Gosuki can be built and run on Open/Net/Free-bsd
+- Zen browser support
 
 #### Adding browsers definitions in a YAML file
 
