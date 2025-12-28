@@ -104,8 +104,10 @@ Gosuki currently supports Linux and MacOS<sub>beta</sub> . More platforms are [p
 
 ### Packages
 
-<div align="center">
+<div>
 <a href="https://aur.archlinux.org/packages/gosuki-git"><img src="https://img.shields.io/badge/Arch-AUR-blue?logo=archlinux"></a>
+<br>
+<a href="https://git.blob42.xyz/gosuki.net/-/packages/debian/gosuki"><img src="https://img.shields.io/badge/Debian-A81D33?logo=debian"></a>
 </div>
 
 
